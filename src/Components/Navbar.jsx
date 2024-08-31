@@ -1,8 +1,7 @@
 import { IoMdMenu, IoMdClose } from "react-icons/io";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -11,7 +10,8 @@ const Navbar = () => {
     verification: false,
     whyTechpigeon: false,
   });
-  const [visible, setVisible] = useState(false);
+
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setOpen(!open);
@@ -24,15 +24,51 @@ const Navbar = () => {
     }));
   };
 
-  const navigate = useNavigate();
-
-  const handleRegisterClick = () => {
-  navigate('/register-startup');
+  const handleScrollToAbout = () => {
+    document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+    setDropdownOpen({
+      contact: false,
+      verification: false,
+      whyTechpigeon: false,
+    });
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownOpen.contact ||
+        dropdownOpen.verification ||
+        dropdownOpen.whyTechpigeon
+      ) {
+        const dropdowns = document.querySelectorAll('.dropdown-menu');
+        let clickedOutside = true;
+
+        dropdowns.forEach(dropdown => {
+          if (dropdown.contains(event.target)) {
+            clickedOutside = false;
+          }
+        });
+
+        if (clickedOutside) {
+          setDropdownOpen({
+            contact: false,
+            verification: false,
+            whyTechpigeon: false,
+          });
+        }
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [dropdownOpen]);
+
   return (
-    <header className="bg-[#191717] text-white py-6 px-4 fixed top-0 left-0 right-0 z-10 text-sm font-primary  ">
-      <div className="md:container md:mx-auto flex items-center justify-between  h-full gap-9 text-sm md:w-full max-w-[600px]">
+    <header className="bg-[#191717] text-white py-6 px-4 fixed top-0 left-0 right-0 z-10 text-sm font-primary">
+      <div className="md:container md:mx-auto flex items-center justify-between h-full gap-9 text-sm md:w-full max-w-[600px]">
         {/* Logo */}
         <div>
           <img src="/image.png" alt="Logo" />
@@ -41,7 +77,7 @@ const Navbar = () => {
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex space-x-8 items-center">
           {/* Why Techpigeon Dropdown */}
-          <div className="relative">
+          <div className="relative dropdown-menu">
             <span
               className="cursor-pointer hover:text-gray-400 flex items-center"
               onClick={() => toggleDropdown("whyTechpigeon")}
@@ -51,20 +87,28 @@ const Navbar = () => {
             {dropdownOpen.whyTechpigeon && (
               <div className="absolute left-0 mt-2 bg-black text-white rounded shadow-lg">
                 <ul className="w-[250px]">
-                  <li className="px-4 py-2 cursor-pointer">About</li>
-                  <li className="px-4 py-2 cursor-pointer">About Our Startup Network</li>
+                  <li className="px-4 py-2 cursor-pointer" onClick={handleScrollToAbout}>
+                    About
+                  </li>
+                  <li className="px-4 py-2 cursor-pointer">
+                    About Our Startup Network
+                  </li>
                 </ul>
               </div>
             )}
           </div>
 
-          <a><span className="cursor-pointer">Solution</span></a>
-          <a><span className="cursor-pointer">TNS</span></a>
-          <a><span className="cursor-pointer">Blog</span></a>
-          <a><span className="cursor-pointer">MSDMC</span></a>
+          <span className="cursor-pointer" onClick={handleScrollToAbout}>
+            Solution
+          </span>
+          <span className="cursor-pointer" onClick={handleScrollToAbout}>
+            TNS
+          </span>
+          <span className="cursor-pointer">Blog</span>
+          <span className="cursor-pointer">MSDMC</span>
 
           {/* Contact Dropdown */}
-          <div className="relative">
+          <div className="relative dropdown-menu">
             <span
               className="cursor-pointer hover:text-gray-400 flex text-center gap-2 items-center"
               onClick={() => toggleDropdown("contact")}
@@ -82,12 +126,12 @@ const Navbar = () => {
           </div>
 
           {/* Verification Dropdown */}
-          <div className="relative">
+          <div className="relative dropdown-menu">
             <span
               className="cursor-pointer hover:text-gray-400 flex items-center gap-2"
               onClick={() => toggleDropdown("verification")}
             >
-              Verification<FaAngleDown />
+              Verification <FaAngleDown />
             </span>
             {dropdownOpen.verification && (
               <div className="absolute left-0 mt-2 bg-black text-white rounded shadow-lg">
@@ -105,7 +149,7 @@ const Navbar = () => {
         <div className="text-sm">
           <div className="hidden md:flex space-x-4 items-center font-sansg text-sm">
             <button
-              onClick={handleRegisterClick}
+              onClick={() => navigate('/register-startup')}
               className="bg-[#5CC4EB] text-white text-xs px-4 py-2 rounded-3xl"
             >
               Register Your Startup
@@ -147,14 +191,22 @@ const Navbar = () => {
             {dropdownOpen.whyTechpigeon && (
               <div className="mt-2 bg-white text-black rounded shadow-lg">
                 <ul>
-                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">About</li>
-                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">Why Us</li>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer" onClick={handleScrollToAbout}>
+                    About
+                  </li>
+                  <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
+                    Why Us
+                  </li>
                 </ul>
               </div>
             )}
           </div>
-          <span className="cursor-pointer">Solution</span>
-          <span className="cursor-pointer">TNS</span>
+          <span className="cursor-pointer" onClick={handleScrollToAbout}>
+            Solution
+          </span>
+          <span className="cursor-pointer" onClick={handleScrollToAbout}>
+            TNS
+          </span>
           <span className="cursor-pointer">Blog</span>
           <span className="cursor-pointer">MSDMC</span>
 
@@ -196,7 +248,10 @@ const Navbar = () => {
 
           {/* Mobile Buttons */}
           <div className="flex flex-col space-y-4 mt-4">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              onClick={() => navigate('/register-startup')}
+            >
               Register Startup
             </button>
             <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
@@ -211,10 +266,6 @@ const Navbar = () => {
           </div>
         </div>
       )}
-      
-      {/* Conditionally render the RegStateup component */}
-      {visible && <RegStateup />}
-      
     </header>
   );
 };

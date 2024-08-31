@@ -10,6 +10,7 @@ const Aboutus = () => {
 
   return (
 <div
+id="about"
 className='flex md:flex-row flex-col px-[50px] py-[100px] container mx-auto font-primary '>
 
 <div>
