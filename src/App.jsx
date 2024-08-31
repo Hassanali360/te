@@ -13,22 +13,24 @@ import RegStateup from './Components/RegStateup';
 const App = () => {
   return (
     <Router>
-      <Navbar />
+      <div className="w-full max-w-full overflow-x-hidden">
+        <Navbar />
+        
+        <Routes>
+          <Route path="/" element={<div className="w-full max-w-full overflow-x-hidden">
+            <Hero />
+            <Hero2 />
+            <Aboutus />
+            <StartupN />
+            <KashmiecareU />
+            <Reviews />
+          </div>} />
 
-      <Routes>
-        <Route path="/" element={<>
-          <Hero />
-          <Hero2 />
-          <Aboutus />
-          <StartupN />
-          <KashmiecareU />
-          <Reviews />
-        </>} />
+          <Route path="/register-startup" element={<RegStateup />} />
+        </Routes>
 
-        <Route path="/register-startup" element={<RegStateup />} />
-      </Routes>
-
-      <Footer />
+        <Footer />
+      </div>
     </Router>
   );
 };

@@ -13,7 +13,7 @@ function RegistrationForm() {
     <div id='RegStateup' className='     bg-[#BBA442] mt-10'>  
 
 
-    <div className='bg-white  px-[200px] py-[150px] mx-auto container md:text-start text-center'>
+    <div className='bg-white  md:px-[200px] px-9 py-[150px] mx-auto container md:text-start  md:w-[1300px] w-auto text-start'>
       <h1 className='text-2xl font-bold font-primary'>Register your business on TSN</h1>
       <p className='font-semibold mt-3'>
 Techpigeon Startups Network (TSN) Pakistan's online one-stop solution for business owners,entrepreneurs where they can have access to useful resources, world-class events and a network where they get exposure to help them grow their business.
@@ -30,7 +30,7 @@ Have a trusted network of business friends.
 Be assured what you're doing truly matters.
 Take it up a notch - now is the time!</p>
     </div>
-        <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-4 bg-white rounded-lg shadow-md px-[200px] py-[50px] mx-auto container">
+        <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-4 bg-white rounded-lg shadow-md md:px-[200px] px-9 py-[50px] mx-auto container">
       <h2 className="text-2xl font-bold">Register Your Business on TSN</h2>
 
       {/* Startup / Business Name */}

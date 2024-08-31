@@ -7,7 +7,7 @@ import { FaCropSimple } from "react-icons/fa6";
 const Hero2 = () => {
   return (
     <div className='bg-[#BBA442] ' id="hero">
-        <div className='flex md:flex-row flex-col px-[50px] py-[60px] container md:mx-auto md:space-y-0 space-y-8'>
+        <div className='flex md:flex-row flex-col md:px-[50px] md:py-[60px] md:container md:mx-auto md:space-y-0 space-y-8 px-[30px] py-[30px]'>
           
           <div className='space-y-3 font-semibold'>
           <div className='flex items-center  text-white gap-1'>

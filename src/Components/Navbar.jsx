@@ -31,8 +31,8 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-[#191717] text-white py-6 px-4 fixed top-0 left-0 right-0 z-10 text-sm font-primary">
-      <div className="container mx-auto flex items-center justify-between h-full gap-9 text-sm">
+    <header className="bg-[#191717] text-white py-6 px-4 fixed top-0 left-0 right-0 z-10 text-sm font-primary  ">
+      <div className="md:container md:mx-auto flex items-center justify-between  h-full gap-9 text-sm md:w-full max-w-[600px]">
         {/* Logo */}
         <div>
           <img src="/image.png" alt="Logo" />
