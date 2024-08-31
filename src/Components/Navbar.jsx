@@ -28,7 +28,7 @@ const Navbar = () => {
 
   const handleRegisterClick = () => {
     setVisible(true);
-    navigate('/RegStateup');
+    navigate('/register-startup');
   };
 
   return (
