@@ -27,8 +27,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleRegisterClick = () => {
-    setVisible(true);
-    navigate('/register-startup');
+  navigate('/register-startup');
   };
 
   return (
